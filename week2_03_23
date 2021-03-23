@@ -1,0 +1,412 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled0.ipynb",
+      "private_outputs": true,
+      "provenance": [],
+      "collapsed_sections": [],
+      "toc_visible": true,
+      "authorship_tag": "ABX9TyMc4Yut/UW6FGeqf8aZt+Tn",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/ohhondgi/OHpago/blob/master/week2_03_23\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "5-cOpJMLPZ5-"
+      },
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "data = pd.read_csv('2. train.csv')\n",
+        "data"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "DxUHuxvUQNv4"
+      },
+      "source": [
+        "data.info()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ohmqpjVrQRzM"
+      },
+      "source": [
+        "a = [1,2,1,3,1,4,2,4,5,3]\n",
+        "print(set(a))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "QwE5rR9oRK-S"
+      },
+      "source": [
+        "a = np.array(data['price_range'])\n",
+        "print(set(a))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "XI_yy_8QRVZz"
+      },
+      "source": [
+        "data_copy = data.copy()\n",
+        "data_copy"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "oNTlKXl6RcBn"
+      },
+      "source": [
+        "data_corr = data_copy.corr()\n",
+        "data_corr"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ns2zcJztRj4R"
+      },
+      "source": [
+        "import seaborn as sns\n",
+        "\n",
+        "pit.figure(figsize = (10,10))\n",
+        "sns.heatmap(data=data_corr, annot = True, fmt='.2f',linewidths=.5)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "K74PeacHSCiW"
+      },
+      "source": [
+        "data_corr['price_range'].sort_values()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "702tuHEBSH6P"
+      },
+      "source": [
+        "attributes = ['ram','price_range','battery_power','px+width','px_height']"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "xCAyQfsqTGIv"
+      },
+      "source": [
+        "data.plot(kind='scatter',x= 'price_range', y= 'ram')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "jgKSz6oZTXmJ"
+      },
+      "source": [
+        "train_x = data_copy[attributes]\n",
+        "train_y = train_x['price_range']\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "OxnaMdkZUCBw"
+      },
+      "source": [
+        "from sklearn.model_selection import train_test_split\n",
+        "\n",
+        "train_set, test_set = train_test_split(train_x, test_size=0.2, random_state=42)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "gMwNJuF8UpjF"
+      },
+      "source": [
+        "train_set.shape"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "QRmI6202Urjc"
+      },
+      "source": [
+        "test_set.shape"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "97hNaDCnUt_0"
+      },
+      "source": [
+        "train_y = train_set['price_range']\n",
+        "del train_set['price_range']"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "KlceOVCtU1iy"
+      },
+      "source": [
+        "train_set.shape"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "LZq9nlW_U9Sn"
+      },
+      "source": [
+        "test_set.shape"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "QrXJw3g5VA0d"
+      },
+      "source": [
+        "train_v.shape"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "39AdhSxtVC3W"
+      },
+      "source": [
+        "test_y.shape"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "jS7OOaSDVF54"
+      },
+      "source": [
+        "from sklearn.neighbors import KNeighborsClassifier\n",
+        "\n",
+        "knn = KNeighborsClassifier(n_neighbors=150)\n",
+        "knn.fit(train_set,train_y)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Ci6Faf_3VhCZ"
+      },
+      "source": [
+        "some_data = train_set.iloc[10:20]\n",
+        "some_labels = train_y.iloc[10:20]\n",
+        "print('예측 : ', knn.predict(some_data))\n",
+        "print('실제 답 :',np.array(some_labels))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ygaOlJUHV-fz"
+      },
+      "source": [
+        "from sklearn.tree import DecisionTreeClassifier\n",
+        "\n",
+        "tree_cif = DecisionTreeClassifier(max_depth=4)\n",
+        "tree_cif.fit(train_set, train_y)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "qsjlUe5GWNZh"
+      },
+      "source": [
+        "some_data = train_set.iloc[10:20]\n",
+        "some_labels = train_y.iloc[10:20]\n",
+        "print('예측 : ', tree_cif.predict(some_data))\n",
+        "print('실제 답 :',np.array(some_labels))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "FiAtk1LxWV9o"
+      },
+      "source": [
+        "from sklearn.ensemble import RandomForestClassifier\n",
+        "\n",
+        "forest_cif = RandomForestClassifier(n_estimator=5, random_state=42)\n",
+        "forest_cif.fit(train_set, train_y)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Oa8lp7vfWoGX"
+      },
+      "source": [
+        "some_data = train_set.iloc[10:20]\n",
+        "some_labels = train_y.iloc[10:20]\n",
+        "print('예측 : ', tree_cif.predict(some_data))\n",
+        "print('실제 답 :',np.array(some_labels))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "BL19JNL9W0KE"
+      },
+      "source": [
+        "from sklearn.metrics import mean_squared_error\n",
+        "\n",
+        "predictions = knn.predict(train_set)\n",
+        "tree_mse = mean_squared_error(train_y.predictions)\n",
+        "tree_mse = np.sqrt(tree_mse)\n",
+        "tree_mse"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "CQCKV12pXYkh"
+      },
+      "source": [
+        "from sklearn.metrics import mean_squared_error\n",
+        "\n",
+        "predictions = knn.predict(train_set)\n",
+        "forest_mse = mean_squared_error(train_y.predictions)\n",
+        "forest_mse = np.sqrt(forest_mse)\n",
+        "forest_mse"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "O4qoghYnXf5Y"
+      },
+      "source": [
+        "print('DecisionTree Accuracy(train) : ',tree_cif.score(train_set,train_y))\n",
+        "print('KNN Accuracy(train) : ',knn.score(train_set,train_y))\n",
+        "print('RandomForest Accuracy(train) : ',forest_cif.score(train_set,train_y))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ArdSR67kXo4q"
+      },
+      "source": [
+        "print('DecisionTree Accuracy(test) : ',tree_cif.score(test_set,test_y))\n",
+        "print('KNN Accuracy(test) : ',knn.score(test_set,test_y))\n",
+        "print('RandomForest Accuracy(test) : ',forest_cif.score(test_set,test_y))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "9EqzW7QpTyvu"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
